@@ -119,6 +119,7 @@ hr {
   padding: 8px 2px;
   margin: 9px 15px 0;
   transition: color 0.3s;
+  cursor: pointer;
 }
 #menu.scrolled .navbar-nav > li > a {
   color: #333; 
