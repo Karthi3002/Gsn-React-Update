@@ -44,5 +44,18 @@
 
   <!-- Scripts -->
   <script type="text/javascript" src="%PUBLIC_URL%/js/jquery.1.11.1.js"></script>
+  <script>
+    (function ($) {
+      var originalFind = $.fn.find;
+      $.fn.find = function (selector) {
+        try {
+          return originalFind.call(this, selector);
+        } catch (e) {
+          console.warn("⚠️ Ignored invalid jQuery selector:", selector);
+          return this;
+        }
+      };
+    })(jQuery);
+  </script>
   <script type="text/javascript" src="%PUBLIC_URL%/js/bootstrap.js"></script>
 </body>

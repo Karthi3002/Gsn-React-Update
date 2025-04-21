@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "font-awesome/css/font-awesome.min.css";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import { Navigation } from "./components/navigation";
 import { Header } from "./components/header";
@@ -27,37 +27,69 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
   speedAsDuration: true,
 });
 
+// 🟡 New Component: Handles section scrolling using state (from navigation)
+const ScrollHandler = ({ children }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = window.location.hash;
+
+    // ✅ Only scroll to hash if it's a valid in-page anchor (no slashes)
+    if (hash && !hash.includes("/")) {
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 500);
+    }
+
+    // ✅ Optional: Support programmatic scroll from location.state
+    if (location.state?.scrollTo) {
+      setTimeout(() => {
+        const el = document.getElementById(location.state.scrollTo);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+    }
+  }, [location]);
+
+  return children;
+};
+
 const App = () => {
   const [landingPageData, setLandingPageData] = useState({});
+
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
 
   return (
     <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Navigation />
-              <Header data={landingPageData.Header} />
-              <Benefits data={landingPageData.Benefits} />
-              <About data={landingPageData.About} />
-              <Services data={landingPageData.Services} />
-              <Experience data={landingPageData.Experience} />
-              <JoinGSN data={landingPageData.JoinGSN} />
-              <Testimonials data={landingPageData.Testimonials} />
-              <Blog />
-              <Chapters data={landingPageData.Chapters} />
-              <Contact data={landingPageData.Contact} />
-              <ScrollToTop />
-            </>
-          }
-        />
-        <Route path="/blog/:id" element={<BlogPage />} />
-        <Route path="/all-blogs" element={<AllBlogs />} />
-      </Routes>
+      <ScrollHandler>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Navigation />
+                <Header data={landingPageData.Header} />
+                <Benefits data={landingPageData.Benefits} />
+                <About data={landingPageData.About} />
+                <Services data={landingPageData.Services} />
+                <Experience data={landingPageData.Experience} />
+                <JoinGSN data={landingPageData.JoinGSN} />
+                <Testimonials data={landingPageData.Testimonials} />
+                <Blog />
+                <Chapters data={landingPageData.Chapters} />
+                <Contact data={landingPageData.Contact} />
+                <ScrollToTop />
+              </>
+            }
+          />
+          <Route path="/blog/:id" element={<BlogPage />} />
+          <Route path="/all-blogs" element={<AllBlogs />} />
+        </Routes>
+      </ScrollHandler>
     </Router>
   );
 };

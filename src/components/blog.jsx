@@ -6,7 +6,7 @@ const Blog = () => {
   const posts = blogData.blog;
 
   return (
-    <section className="blog-section py-5">
+    <section className="blog-section py-5" id="blog">
       <div className="blogContainer">
         <h2 className="text-center mb-4">Insights for Smarter Success</h2>
         <div className="row g-4">
@@ -22,7 +22,11 @@ const Blog = () => {
                   <h5 className="blogcard-title">{post.title}</h5>
                   <p className="blogcard-text">{post.excerpt}</p>
                   <small>{post.author} — {post.date}</small>
-                    <Link to={`/blog/${post.id}`} className="btn readmore-btn w-100 mt-2">Read More</Link>
+                  <Link
+                    to={`/blog/${post.id}`}
+                    className="btn readmore-btn w-100 mt-2"
+                    onClick={(e) => e.stopPropagation()} // prevents jQuery from hijacking the link
+                  >Read More</Link>
                 </div>
               </div>
             </div>

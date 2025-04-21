@@ -91,10 +91,16 @@
 //navigation scroll
 
 import React, { useState, useEffect } from "react";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
+import { Link, useLocation } from "react-router-dom";
+
+
 
 export const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,15 +132,30 @@ export const Navigation = () => {
         </div>
 
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul className="nav navbar-nav navbar-right">
-            <li><Link to="home" smooth={true} duration={500}>Home</Link></li>
-            <li><Link to="about" smooth={true} duration={500}>About</Link></li>
-            <li><Link to="services" smooth={true} duration={500}>Services</Link></li>
-            <li><Link to="experience" smooth={true} duration={500}>GSN Experience</Link></li>
-            <li><Link to="join gsn" smooth={true} duration={500}>Join GSN</Link></li>
-            <li><Link to="blog" smooth={true} duration={500}>Blog</Link></li>
-            <li><Link to="contact" smooth={true} duration={500}>Contact</Link></li>
-          </ul>
+        <ul className="nav navbar-nav navbar-right">
+  {isHome ? (
+    <>
+      <li><ScrollLink to="header" smooth={true} duration={500}>Home</ScrollLink></li>
+      <li><ScrollLink to="about" smooth={true} duration={500}>About</ScrollLink></li>
+      <li><ScrollLink to="services" smooth={true} duration={500}>Services</ScrollLink></li>
+      <li><ScrollLink to="experience" smooth={true} duration={500}>GSN Experience</ScrollLink></li>
+      <li><ScrollLink to="join gsn" smooth={true} duration={500}>Join GSN</ScrollLink></li>
+      <li><ScrollLink to="blog" smooth={true} duration={500}>Blog</ScrollLink></li>
+      <li><ScrollLink to="contact" smooth={true} duration={500}>Contact</ScrollLink></li>
+    </>
+  ) : (
+    <>
+      <li><Link to="/" state={{scrollTo: "header"}}>Home</Link></li>
+      <li><Link to="/" state={{scrollTo:"about"}}>About</Link></li>
+      <li><Link to="/" state={{scrollTo:"services"}}>Services</Link></li>
+      <li><Link to="/" state={{scrollTo:"experience"}}>GSN Experience</Link></li>
+      <li><Link to="/" state={{scrollTo:"join%20gsn"}}>Join GSN</Link></li>
+      <li><Link to="/" state={{scrollTo:"blog"}}>Blog</Link></li>
+      <li><Link to="/" state={{scrollTo:"contact"}}>Contact</Link></li>
+    </>
+  )}
+</ul>
+
         </div>
       </div>
     </nav>

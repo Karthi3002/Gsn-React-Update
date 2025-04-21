@@ -21,6 +21,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import blogData from "../data/data.json";
+import { Navigation } from "../components/navigation";
+// import { useParams, useNavigate } from "react-router-dom";
 
 const categories = [
   "All",
@@ -40,6 +42,8 @@ const AllBlogs = () => {
       : blogData.blog.filter((post) => post.category === selectedCategory);
 
   return (
+        <>
+          <Navigation />
     <div className="all-blogs-container">
       <h2 className="section-title">Explore Our Blogs</h2>
 
@@ -86,6 +90,7 @@ const AllBlogs = () => {
         </Link>
       </div>
     </div>
+        </> 
   );
 };
 

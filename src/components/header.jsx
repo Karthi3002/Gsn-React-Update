@@ -3,6 +3,7 @@ import React from "react";
 
 export const Header = (props) => {
   return (
+    <section id= "header">
     <header id="header">
       <div className="video-container">
         <video autoPlay loop muted playsInline>
@@ -32,5 +33,6 @@ export const Header = (props) => {
         </div>
       </div>
     </header>
+    </section>
   );
 };
