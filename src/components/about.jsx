@@ -113,7 +113,7 @@ const About = ({ data }) => {
           {/* Left Column - Image */}
           <div className="about-image">
             <img
-              src="img/about.png"
+              src={`${process.env.PUBLIC_URL}/img/about.png`}
               alt="About GSN"
               className={isVisible ? "show" : ""}
             />

@@ -5,7 +5,7 @@
   },
 
   
-    "Benefits": [
+    "benefits": [
       {
         "title": "Enhanced Visibility",
         "description": "Increase your brand recognition with a strategic online presence.",
@@ -30,20 +30,38 @@
   "mission": "To empower you with a revolutionary network that turns connections into growth—delivering referrals, relationships, and recognition through a one-of-a-kind approach."
 },
   
-
-  "blogs": [
-    {
-      "id": "1",
-      "title": "Don't miss a single match this season.",
-      "author": "Mithcal",
-      "date": "1h ago",
-      "excerpt": "Whether it's an away game or tournament...",
-      "image": "/img/image.png",
-      "slug": "match-season",
-      "content": "Full blog content goes here..."
-    }
-   
-  ],
+"blog": [
+  {
+    "id": 1,
+    "title": "Networking’s Next Frontier—Are You Ready?",
+    "date": "March 26, 2025",
+    "excerpt": "GSN is rewriting the rules with a bold, forward-thinking approach.",
+    "author": "By GSN Team",
+    "image": "/img/blog/sucess.png",
+    "content": "Full blog content for blog 1...",
+    "category": "AI Revolution in Networking"
+  },
+  {
+    "id": 2,
+    "title": "How GSN Unlocked My Next Big Win",
+    "date": "March 24, 2025",
+    "excerpt": "A member shares their journey highlighting growth, resilience, and success.",
+    "author": "By GSN Member",
+    "image": "/img/blog/win.png",
+    "content": "Full blog content for blog 2...",
+    "category": "Member Success Stories"
+  },
+  {
+    "id": 3,
+    "title": "The Secret to Smarter Success",
+    "date": "March 20, 2025",
+    "excerpt": "Discover powerful strategies, smart networking tips, and real-world success stories.",
+    "author": "By GSN Insights",
+    "image": "/img/blog/network.png",
+    "content": "Full blog content for blog 3...",
+    "category": "Referral Strategies"
+  }
+],
 
 
   

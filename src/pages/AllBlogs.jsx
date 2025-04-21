@@ -18,39 +18,75 @@
 // };
 
 // export default AllBlogs;
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import data from "../data/data.json";
+import blogData from "../data/data.json";
 
+const categories = [
+  "All",
+  "Referral Strategies",
+  "Member Success Stories",
+  "Leadership & Mind-set",
+  "AI Revolution in Networking",
+  "GSN Culture & Values",
+];
 
 const AllBlogs = () => {
-    const blogs = data.blogs || []; // Fallback to an empty array
-  
-    if (blogs.length === 0) {
-      return <p>No blogs available.</p>;
-    }
-  
-    return (
-      <div className="container py-5">
-        <h1 className="mb-4">All Blogs</h1>
-        <div className="row">
-          {blogs.map((blog) => (
-            <div className="col-md-4 mb-4" key={blog.id}>
-              <div className="card h-100">
-                <img src={blog.image} className="card-img-top" alt={blog.title} />
-                <div className="card-body">
-                  <h5 className="card-title">{blog.title}</h5>
-                  <p className="card-text">{blog.excerpt}</p>
-                  <Link to={`/blog/${blog.slug}`} className="btn btn-outline-dark">
-                    Read More
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredBlogs =
+    selectedCategory === "All"
+      ? blogData.blog
+      : blogData.blog.filter((post) => post.category === selectedCategory);
+
+  return (
+    <div className="all-blogs-container">
+      <h2 className="section-title">Explore Our Blogs</h2>
+
+      <div className="category-buttons">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={`cat-btn ${
+              selectedCategory === cat ? "active" : ""
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
-    );
-  };
+
+      <div className="blog-grid">
+        {filteredBlogs.map((post) => (
+          <div className="blog-card" key={post.id}>
+            <img
+              src={`${process.env.PUBLIC_URL}${post.image}`}
+              alt={post.title}
+              className="blog-img"
+            />
+            <div className="blog-content">
+              <h5 className="blog-title">{post.title}</h5>
+              <p className="blog-meta">
+                By {post.author} • {post.date}
+              </p>
+              <p className="blog-excerpt">{post.excerpt}</p>
+              <span className="blog-category">{post.category}</span>
+              <Link to={`/blog/${post.id}`} className="read-more-btn">
+                Read More →
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="back-home">
+        <Link to="/" className="back-home-link">
+          ← Back to Home
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default AllBlogs;

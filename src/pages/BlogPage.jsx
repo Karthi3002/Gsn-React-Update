@@ -1,21 +1,43 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import blogs from "../data/data.json";
+import { useParams, useNavigate } from "react-router-dom";
+import blogData from "../data/data.json";
 
 const BlogPage = () => {
-    const { slug } = useParams();
-    const blog = blogs?.find((b) => b.slug === slug); // Add optional chaining
-  
-    if (!blog) {
-      return <h2>Blog not found</h2>;
-    }
-  
-    return (
-      <div>
-        <h1>{blog.title}</h1>
-        <p>{blog.content}</p>
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const blog = blogData.blog.find((item) => item.id.toString() === id);
+
+  if (!blog) return <h2 className="text-center my-5">Blog not found</h2>;
+
+  return (
+    <div className="blogpage-container">
+      <div className="blogpage-header">
+        <img
+          src={`${process.env.PUBLIC_URL}${blog.image}`}
+          alt={blog.title}
+          className="blogpage-image"
+        />
       </div>
-    );
-  };
+
+      <div className="blogpage-content container">
+        <h1 className="blogpage-title">{blog.title}</h1>
+        <p className="blogpage-meta">
+          <span className="blogpage-author">{blog.author}</span> &nbsp;|&nbsp;{" "}
+          <span className="blogpage-date">{blog.date}</span>
+        </p>
+        <hr className="blogpage-divider" />
+        <p className="blogpage-text">{blog.content}</p>
+
+        <div className="text-center mt-5">
+          <button className="btn btn-dark blogpage-button" onClick={() => navigate("/all-blogs")}>
+            See All Blogs
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default BlogPage;
+

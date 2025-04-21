@@ -104,7 +104,7 @@ const TestimonialSection = () => {
   </div>
       <div className="testimonial-wrapper">
         <div className="testimonial-image">
-          <img src="img/about.jpg" alt="" />
+          <img src={`${process.env.PUBLIC_URL}/img/about.jpg`} alt="" />
           <div className="image-overlay">
     <div className="overlay-content">
       <p>Ready to write your own success story?</p>
